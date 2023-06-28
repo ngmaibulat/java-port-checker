@@ -6,6 +6,12 @@ plugins {
 
 application {
     mainClass = 'com.ngm.Main'
+
+    applicationName = 'tcpping'
+
+    // jpackage {
+    //     installerDir = file('build/installer')
+    // }
 }
 
 repositories {

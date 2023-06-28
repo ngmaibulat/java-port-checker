@@ -58,6 +58,8 @@ public class Main {
         InetSocketAddress dst = null;
         String ipAddress = null;
 
+        long startTime = System.currentTimeMillis();
+
         try {
             address = InetAddress.getByName(host);
             ipAddress = address.getHostAddress();
@@ -66,6 +68,9 @@ public class Main {
             System.out.println("Unable to resolve hostname: " + host);
             System.exit(1);
         }
+
+        long endTime = System.currentTimeMillis();
+        long timeResolve = endTime - startTime;
         
 
         var msg = String.format("Testing connection: %1$s:%2$d, timeout: %3$d ms", host, port, timeout);
@@ -78,9 +83,15 @@ public class Main {
 
         try {
             Socket socket = new Socket();
+
+            startTime = System.currentTimeMillis();
             socket.connect(dst, timeout);
+            endTime = System.currentTimeMillis();
+            long timeConnect = endTime - startTime;
 
             System.out.println(successMsg);
+            var timeMsg = String.format("Time to resolve: %1$d, time to connect: %2$d", timeResolve, timeConnect);
+            logger.info(timeMsg);
             socket.close();
         } catch (IOException e) {
             System.out.println(failMsg);

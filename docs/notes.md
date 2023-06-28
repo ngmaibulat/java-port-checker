@@ -13,6 +13,11 @@
 -   https://github.com/freva/ascii-table
 -   https://github.com/vdmeer/asciitable
 
+### JPackage
+
+-   https://codetinkering.com/how-to-use-jpackage-tool-cli-for-macos-apps/
+-   https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html
+
 ### Tshoot
 
 CMD+SHIFT+P -> Java: Clean the Java language server workspace
