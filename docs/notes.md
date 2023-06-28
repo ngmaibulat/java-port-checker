@@ -1,3 +1,7 @@
+### OpenJDK 21
+
+-   https://openjdk.org/projects/jdk/21/
+
 ### Hibernate
 
 -   https://howtodoinjava.com/hibernate/unable-to-locate-persister-error/
