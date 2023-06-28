@@ -1,1 +1,1 @@
-java -jar build/libs/demo-app-all.jar
+java -jar build/libs/*-all.jar
