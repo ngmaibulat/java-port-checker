@@ -23,16 +23,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // logger.info("This is an informational message");
         // logger.debug("This is a debug message");
         // logger.warn("This is a warning message");
-        // logger.error("This is an error message");
+
+        // Load config from environment variables
+        // Or, .emv file
+        // Or, default values
 
         var cfg = new Config();
         String host = cfg.getStringVariable("PORTCHECKER_HOST", "portquiz.net");
         int port = cfg.getIntVariable("PORTCHECKER_PORT", 443);
-        //PORTCHECKER_TIMEOUT_MS
         int timeout = cfg.getIntVariable("PORTCHECKER_TIMEOUT_MS", 5_000);
+
+
+        // Parse command-line arguments
+        // Check if port was redefined via command-line argument
 
         if (args.length > 0) {
             // Assuming the first command-line argument is the integer value
@@ -54,16 +59,15 @@ public class Main {
             logger.info(portMsg);
         }
 
-        InetAddress address = null;
-        InetSocketAddress dst = null;
-        String ipAddress = null;
+        // Start resolving hostname to IP address
+        // and measure time
+        // We will have an array of IP addresses
 
+        InetAddress[] addresses = null;
         long startTime = System.currentTimeMillis();
 
         try {
-            address = InetAddress.getByName(host);
-            ipAddress = address.getHostAddress();
-            dst = new java.net.InetSocketAddress(address, port);
+            addresses = InetAddress.getAllByName(host);
         } catch (UnknownHostException e) {
             System.out.println("Unable to resolve hostname: " + host);
             System.exit(1);
@@ -71,34 +75,61 @@ public class Main {
 
         long endTime = System.currentTimeMillis();
         long timeResolve = endTime - startTime;
-        
+
+
+        // Report on results of
+        // resolving hostname to IP address
 
         var msg = String.format("Testing connection: %1$s:%2$d, timeout: %3$d ms", host, port, timeout);
-        var resolveMsg = String.format("Host %1$s resolved to %2$s:", host, ipAddress);
-        var successMsg = String.format("Success connect: %1$s:%2$d", host, port);
-        var failMsg = String.format("Fail connect: %1$s:%2$d", host, port);
-
         logger.info(msg);
-        logger.info(resolveMsg);
 
-        try {
-            Socket socket = new Socket();
+        if (addresses.length > 1) {
+            var msgFound = String.format("Found %1$d addresses for host %2$s", addresses.length, host);
+            logger.info(msgFound);
+        }
+        else if (addresses.length == 1) {
+            var resolveMsg = String.format("Host %1$s resolved to %2$s:", host, addresses[0].getHostAddress());        
+            logger.info(resolveMsg);
+        }
+        else {
+            //should not happen, actually
+            System.out.println("Unable to resolve hostname: " + host);
+            System.exit(1);
+        }
 
-            startTime = System.currentTimeMillis();
-            socket.connect(dst, timeout);
-            endTime = System.currentTimeMillis();
-            long timeConnect = endTime - startTime;
 
-            System.out.println(successMsg);
-            var timeMsg = String.format("Time to resolve: %1$d, time to connect: %2$d", timeResolve, timeConnect);
-            logger.info(timeMsg);
-            socket.close();
-        } catch (IOException e) {
-            System.out.println(failMsg);
-            //let's return non-zero exit code
-            //to indicate that connection failed
-            //so it can be used in scripting
-            System.exit(2);
+        // Resolve done!
+        // Iterate over all addresses
+        // Connect and measure time
+
+
+        for (InetAddress addr: addresses) {
+
+            // System.out.println(addr.getHostAddress());
+            String ipAddress = addr.getHostAddress();
+
+            try {
+                var con = new TCPConnection(addr, port);
+                long timeConnect = con.ping(timeout);
+                // Socket socket = new Socket();
+
+                // startTime = System.currentTimeMillis();
+                // socket.connect(dst, timeout);
+                // endTime = System.currentTimeMillis();
+                // long timeConnect = endTime - startTime;
+                
+                var successMsg = String.format("Success connect: %1$s:%2$d", ipAddress, port);
+                System.out.println(successMsg);
+
+                var timeMsg = String.format("%1$s: time to resolve: %2$d, time to connect: %3$d", ipAddress, timeResolve, timeConnect);
+                logger.info(timeMsg);
+                
+            } catch (IOException e) {
+
+                var failMsg = String.format("Fail connect: %1$s:%2$d", ipAddress, port);
+                logger.error(failMsg);
+
+            }
         }
         //the end
     }

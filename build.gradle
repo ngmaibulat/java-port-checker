@@ -24,6 +24,8 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.8'
     implementation 'ch.qos.logback:logback-core:1.4.8'
 
+    implementation 'org.tuxdude.logback.extensions:logback-colorizer:1.0.1'
+
     // https://mvnrepository.com/artifact/com.mitchtalmadge/ascii-data
     implementation group: 'com.mitchtalmadge', name: 'ascii-data', version: '1.4.0'
 

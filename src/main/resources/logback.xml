@@ -1,9 +1,12 @@
 <configuration>
+
+    <property scope="context" name="COLORIZER_COLORS" value="red@,yellow@black,green@,blue@,cyan@" />
+    <conversionRule conversionWord="colorize" converterClass="org.tuxdude.logback.extensions.LogColorizer" />
+
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-        <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %highlight(%-5level) %logger{36} - %msg%n</pattern>
-        <pattern>%highlight(%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n)</pattern>
-    <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern> -->
+        <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %highlight(%-5level) %logger{36} - %msg%n</pattern> -->
+        <pattern>%colorize(%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n)</pattern>
     </encoder>
   </appender>
 
