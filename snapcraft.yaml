@@ -1,0 +1,24 @@
+name: tcping   # you can replace with your application's name
+version: '1.0.2'      # replace with your application's version
+summary: TCP Ping
+description: |
+  Test connectivity to a given TCP port
+  Report connection latency
+
+grade: stable  # must be 'stable' to release into candidate/stable channels
+confinement: strict  # use 'strict' once you have the right plugs and slots
+
+base: core22  # or core20 depending on your needs
+
+parts:
+  tcping:
+    plugin: dump
+    source: ./install  # assuming you're running snapcraft at the root of your project
+    stage-packages:
+      - openjdk-20-jre-headless  # replace with the jre/jdk version your app requires
+
+apps:
+  tcping:
+    command: /usr/bin/java -jar $SNAP/tcpping.jar  # replace with your jar's relative path from the project root
+    plugs:
+      - network

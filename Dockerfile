@@ -10,8 +10,14 @@ COPY docs/entrypoint.sh /app/entrypoint.sh
 
 RUN chmod +x /app/entrypoint.sh
 
-# Set environment variables
+# Some common env, not really needed
+# But useful for other containers
+# so, keep them as standard practice
 
+ENV LANG="en_US.UTF-8"
+ENV NODE_ENV="production"
+
+# Set environment variables
 ENV PORTCHECKER_HOST="portquiz.net"
 ENV PORTCHECKER_PORT="443"
 ENV PORTCHECKER_TIMEOUT_MS="9000"
