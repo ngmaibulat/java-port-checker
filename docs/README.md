@@ -6,7 +6,7 @@ Check if outbound tcp connection is allowed via connection to portquiz.net
 
 ### Install
 
--   For Macos, use the \*.pkg file
+-   For Macos, use the \*.pkg file in `install` folder here
 
 ### Set Path
 
@@ -34,12 +34,13 @@ tcpping 443
 
 ```bash
 docker run ngmaibulat/tcpping
+docker run ngmaibulat/tcpping 443
 ```
 
 ### Other Options
 
 ```bash
-nc -vz portquiz.net 25
+nc -vz portquiz.net 443
 ```
 
 ### Also look at
