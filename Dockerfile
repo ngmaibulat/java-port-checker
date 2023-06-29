@@ -17,6 +17,9 @@ ENV PORTCHECKER_PORT="443"
 ENV PORTCHECKER_TIMEOUT_MS="9000"
 
 # Run the application
-# CMD ["java", "-jar", "/app/tcpping.jar"]
+
 
 ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
+
+# CMD ["java", "-jar", "/app/tcpping.jar"]
+CMD ["443"]
