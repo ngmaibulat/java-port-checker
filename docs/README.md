@@ -19,3 +19,8 @@ export PATH="/Applications/tcpping.app/Contents/MacOS:$PATH"
 ```bash
 nc -vz portquiz.net 25
 ```
+
+### Also look at
+
+-   https://ifconfig.me/
+-   https://www.portquiz.net/

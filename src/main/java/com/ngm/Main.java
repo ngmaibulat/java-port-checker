@@ -102,6 +102,11 @@ public class Main {
         // Iterate over all addresses
         // Connect and measure time
 
+        // CLI Table
+        String[] headers = new String[]{"FQDN", "IP", "Port", "Resolve Time", "Connect Time", "Status"};
+        String[][] data = new String[addresses.length][6];
+
+        int i = 0;
 
         for (InetAddress addr: addresses) {
 
@@ -111,26 +116,41 @@ public class Main {
             try {
                 var con = new TCPConnection(addr, port);
                 long timeConnect = con.ping(timeout);
-                // Socket socket = new Socket();
-
-                // startTime = System.currentTimeMillis();
-                // socket.connect(dst, timeout);
-                // endTime = System.currentTimeMillis();
-                // long timeConnect = endTime - startTime;
-                
-                var successMsg = String.format("Success connect: %1$s:%2$d", ipAddress, port);
-                System.out.println(successMsg);
 
                 var timeMsg = String.format("%1$s: time to resolve: %2$d, time to connect: %3$d", ipAddress, timeResolve, timeConnect);
                 logger.info(timeMsg);
+
+                data[i][0] = host;
+                data[i][1] = ipAddress;
+                data[i][2] = port + "";
+                data[i][3] = "" + timeResolve;
+                data[i][4] = "" + timeConnect;
+                data[i][5] = "Success";
                 
             } catch (IOException e) {
 
                 var failMsg = String.format("Fail connect: %1$s:%2$d", ipAddress, port);
                 logger.error(failMsg);
 
+                data[i][0] = host;
+                data[i][1] = ipAddress;
+                data[i][2] = port + "";
+                data[i][3] = timeResolve + "";
+                data[i][4] = "";
+                data[i][5] = "Fail";
+
+            }
+            finally {
+                i++;
             }
         }
+
+
+        var table = ASCIITable.fromData(headers, data).withTableFormat(new UTF8TableFormat()).toString();
+        // var table = ASCIITable.fromData(headers, data).toString();
+
+        System.out.println(table);
+
         //the end
     }
 }
