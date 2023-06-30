@@ -4,6 +4,15 @@
 -   https://openjdk.org/projects/jdk/22/
 -   https://jdk.java.net/22/
 
+### Features by Versions
+
+-   https://www.marcobehler.com/guides/a-guide-to-java-versions-and-features
+-   https://en.wikipedia.org/wiki/Java_version_history#Java_21
+
+### Manage JDK versions
+
+-   https://sdkman.io/
+
 ### Docker
 
 docker build . -t ngmaibulat/tcpping

@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy the JAR file to the container
 COPY build/libs/tcpping-all.jar /app/tcpping.jar
-COPY docs/entrypoint.sh /app/entrypoint.sh
+COPY scripts/entrypoint.sh /app/entrypoint.sh
 
 RUN chmod +x /app/entrypoint.sh
 
