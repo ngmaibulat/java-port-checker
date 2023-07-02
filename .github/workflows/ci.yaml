@@ -25,13 +25,7 @@ jobs:
               run: |
                   cd install
                   native-image -jar tcpping.jar --no-fallback -H:+BuildReport
-                  echo Hello
+                  ./tcpping
                   pwd
-                  mkdir demo
                   ls -la
-                  cd ..
-                  ls -la
-                  uname
-                  df -h
                   ip addr
-                  sudo ls
