@@ -7,7 +7,7 @@ cp build/libs/tcpping-all.jar install-macos/tcpping.jar
 
 # jpackage --type app-image --input build/libs --main-jar tcpping.jar --name tcpping
 # jpackage --type dmg --input build/libs --main-jar tcpping.jar --name tcpping
-jpackage --type pkg --input install-macos --main-jar tcpping.jar --name tcpping --app-version 1.0.2
+jpackage --type pkg --input install-macos --main-jar tcpping.jar --name tcpping --app-version 1.0.3
 mv tcpping-*.pkg install-macos/
 
 cd install-macos
