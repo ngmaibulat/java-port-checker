@@ -1,6 +1,7 @@
 name: GraalVM Native Image
 
 # https://blogs.oracle.com/developers/post/building-cross-platform-native-images-with-graalvm
+# https://github.com/aws-actions/configure-aws-credentials
 
 on:
     workflow_dispatch:
