@@ -49,8 +49,13 @@ jobs:
             #   env:
             #     AWS_REGION: 'eu-central-1'
 
+            - name: Check AWS CLI1
+              run: |
+                  which aws
+                  aws --version
+
             - name: Set up AWS credentials
-              uses: aws-actions/configure-aws-credentials@v1
+              uses: aws-actions/configure-aws-credentials@v2
               with:
                 aws-access-key-id: ${{ secrets.AWS_KEY_ID }}
                 aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -62,6 +67,12 @@ jobs:
             #     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             #     unzip awscliv2.zip
             #     sudo ./aws/install
+
+
+            - name: Check AWS CLI
+              run: |
+                  which aws
+                  aws --version
 
             - name: Upload to S3
               run: aws s3 sync install s3://ngm-dev-s3/tcpping/
