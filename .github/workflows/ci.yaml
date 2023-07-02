@@ -64,7 +64,7 @@ jobs:
             #     sudo ./aws/install
 
             - name: Upload to S3
-              run: aws s3 sync install s3://ngm-dev-s3/
+              run: aws s3 sync install s3://ngm-dev-s3/tcpping/
             
             - name: Create Snap Package
               run: |
