@@ -1,0 +1,30 @@
+name: Demo
+
+on:
+    workflow_dispatch:
+    push:
+        tags:
+            - "*"
+
+jobs:
+    Run:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: echo
+              run: echo Hi
+
+            - name: multiline
+              run: |
+                  echo Salam
+                  echo Hello
+                  pwd
+                  mkdir demo
+                  ls -la
+                  cd ..
+                  ls -la
+                  uname
+                  df -h
+                  ip addr
+                  sudo ls

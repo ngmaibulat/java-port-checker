@@ -25,4 +25,3 @@ sdk use java 20.0.1-graal
 
 which java
 which native-image
-

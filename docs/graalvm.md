@@ -51,6 +51,20 @@ native-image -jar tcpping.jar
 native-image -jar tcpping.jar --no-fallback -H:+BuildReport
 ```
 
+### Another sample
+
+-   https://blogs.oracle.com/developers/post/building-cross-platform-native-images-with-graalvm
+
+```bash
+native-image \
+    --no-server \
+    --no-fallback \
+    -H:ReflectionConfigurationResources=reflection-config.json \
+    -H:IncludeResources=logback.xml \
+    --allow-incomplete-classpath \
+    -jar build/libs/simple-socket-fn-logger-1.0.0-all.jar
+```
+
 ### Unsupported/Limited Features
 
 -   dynamic loading of code
