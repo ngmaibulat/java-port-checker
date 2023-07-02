@@ -1,4 +1,4 @@
-name: Demo
+name: GraalVM Native Image
 
 on:
     workflow_dispatch:
@@ -23,7 +23,8 @@ jobs:
 
             - name: multiline
               run: |
-                  echo Salam
+                  cd install
+                  native-image -jar tcpping.jar --no-fallback -H:+BuildReport
                   echo Hello
                   pwd
                   mkdir demo
