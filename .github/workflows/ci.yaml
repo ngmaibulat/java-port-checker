@@ -21,6 +21,16 @@ jobs:
             - name: Run single command
               run: echo "running pwd"; pwd
 
+            - name: Build via Gradle
+              run: ./gradlew build
+
+            - name: JPackage
+              run: |
+                  rm -fr install
+                  mkdir install
+                  cp build/libs/tcpping-all.jar install/tcpping.jar
+                  jpackage --version
+
             - name: Make Native Image
               run: |
                   cd install
