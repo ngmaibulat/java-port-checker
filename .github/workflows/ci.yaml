@@ -34,7 +34,7 @@ jobs:
                   jpackage --type deb --input install --main-jar tcpping.jar --name tcpping --app-version 1.0.3
                   jpackage --type rpm --input install --main-jar tcpping.jar --name tcpping --app-version 1.0.3
                   ls -la
-                  sudo apt install ./tcpping_1.0.3_amd64.deb
+                  sudo apt -y install ./tcpping_1.0.3_amd64.deb
                   which tcpping
 
             - name: Make Native Image
