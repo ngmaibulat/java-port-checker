@@ -37,8 +37,6 @@ jobs:
             #       cd install
             #       native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
             #       ./tcpping-linux
-            #       echo ${{ secrets.AWS_KEY_ID }}
-            #       echo ${{ secrets.AWS_BUCKET }}
             
             - name: Upload Native Image to S3
               uses: shallwefootball/s3-upload-action@master
@@ -48,6 +46,8 @@ jobs:
                 aws_bucket: ${{ secrets.AWS_BUCKET }}
                 source_dir: 'install'
                 destination_dir: /tcpping/${{ github.sha }}
+              env:
+                AWS_REGION: 'eu-central-1'
             
             - name: Create Snap Package
               run: |
