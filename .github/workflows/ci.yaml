@@ -13,9 +13,9 @@ jobs:
             - uses: actions/checkout@v3
 
             - name: GitHub Action for GraalVM
-              uses: graalvm/setup-graalvm@v1
+              uses: graalvm/setup-graalvm@v1 # https://github.com/marketplace/actions/github-action-for-graalvm
               with:
-                java-version: '20.0.1' # for a specific JDK 17; or '17' for the latest JDK 17
+                java-version: '20.0.1'
                 distribution: 'graalvm' # New 'distribution' option
 
             - name: Run single command
@@ -33,7 +33,6 @@ jobs:
                   jpackage --version
                   jpackage --type deb --input install --main-jar tcpping.jar --name tcpping --app-version 1.0.3
                   jpackage --type rpm --input install --main-jar tcpping.jar --name tcpping --app-version 1.0.3
-                  jpackage --type exe --input install --main-jar tcpping.jar --name tcpping --app-version 1.0.3
                   mv tcpping-*.pkg install/
                   ls -la ./install
 
