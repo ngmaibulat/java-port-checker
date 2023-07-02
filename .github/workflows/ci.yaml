@@ -18,14 +18,31 @@ jobs:
                 java-version: '20.0.1' # for a specific JDK 17; or '17' for the latest JDK 17
                 distribution: 'graalvm' # New 'distribution' option
 
-            - name: echo
-              run: echo Hi
+            - name: Run single command
+              run: echo "running pwd"; pwd
 
-            - name: multiline
+            - name: Make Native Image
               run: |
                   cd install
                   native-image -jar tcpping.jar --no-fallback -H:+BuildReport
                   ./tcpping
-                  pwd
+            
+            - name: Upload Native Image to S3
+              run: |
                   ls -la
-                  ip addr
+            
+            - name: Create Snap Package
+              run: |
+                  ls -la
+            
+            - name: Upload Snap Package
+              run: |
+                  ls -la
+            
+            - name: Create Docker Image
+              run: |
+                  ls -la
+            
+            - name: Upload Docker Image
+              run: |
+                  ls -la
