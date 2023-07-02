@@ -30,12 +30,13 @@ jobs:
                   mkdir install
                   cp build/libs/tcpping-all.jar install/tcpping.jar
                   jpackage --version
+                  ls -la ./install
 
             - name: Make Native Image
               run: |
                   cd install
-                  native-image -jar tcpping.jar --no-fallback -H:+BuildReport
-                  ./tcpping
+                  native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
+                  ./tcpping-linux
             
             - name: Upload Native Image to S3
               run: |

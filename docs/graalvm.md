@@ -46,9 +46,9 @@ rm -fr mkdir -p ~/tmp
 ### Use GraalVM
 
 ```bash
-cd install
+cd install-macos
 native-image -jar tcpping.jar
-native-image -jar tcpping.jar --no-fallback -H:+BuildReport
+native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-macos
 ```
 
 ### Another sample

@@ -1,14 +1,17 @@
 ./gradlew build
 
-rm -fr install
-mkdir install
+rm -fr install-macos
+mkdir install-macos
 
-cp build/libs/tcpping-all.jar install/tcpping.jar
+cp build/libs/tcpping-all.jar install-macos/tcpping.jar
 
 # jpackage --type app-image --input build/libs --main-jar tcpping.jar --name tcpping
 # jpackage --type dmg --input build/libs --main-jar tcpping.jar --name tcpping
-jpackage --type pkg --input install --main-jar tcpping.jar --name tcpping --app-version 1.0.2
-mv tcpping-*.pkg install/
+jpackage --type pkg --input install-macos --main-jar tcpping.jar --name tcpping --app-version 1.0.2
+mv tcpping-*.pkg install-macos/
+
+cd install-macos
+native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-macos
 
 # hdiutil create -format UDZO -srcfolder tcpping.app tcpping.dmg
 
