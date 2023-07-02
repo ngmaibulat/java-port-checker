@@ -1,0 +1,6 @@
+-   https://pypl.github.io/PYPL.html
+-   https://redmonk.com/sogrady/2023/05/16/language-rankings-1-23/
+-   https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/
+-   https://betterprojectsfaster.com/guide/java-tech-popularity-index-2023-q2/main/
+-   https://betterprojectsfaster.com/guide/java-tech-popularity-index-2023-q2/lang/
+-   https://betterprojectsfaster.com/guide/java-tech-popularity-index-2023-q2/fe-mobile/

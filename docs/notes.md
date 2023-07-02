@@ -8,6 +8,7 @@
 
 -   https://www.marcobehler.com/guides/a-guide-to-java-versions-and-features
 -   https://en.wikipedia.org/wiki/Java_version_history#Java_21
+-   https://openjdk.org/projects/amber/
 
 ### Manage JDK versions
 

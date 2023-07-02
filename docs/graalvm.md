@@ -48,7 +48,7 @@ rm -fr mkdir -p ~/tmp
 ```bash
 cd install
 native-image -jar tcpping.jar
-native-image -jar tcpping.jar --no-fallback
+native-image -jar tcpping.jar --no-fallback -H:+BuildReport
 ```
 
 ### Unsupported/Limited Features
