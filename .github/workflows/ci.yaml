@@ -12,6 +12,9 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
+            - name: GitHub Action for GraalVM
+              uses: graalvm/setup-graalvm@v1
+
             - name: echo
               run: echo Hi
 
