@@ -1,5 +1,7 @@
 name: GraalVM Native Image
 
+# https://blogs.oracle.com/developers/post/building-cross-platform-native-images-with-graalvm
+
 on:
     workflow_dispatch:
     push:
@@ -24,32 +26,32 @@ jobs:
             - name: Build via Gradle
               run: ./gradlew build
 
-            # - name: JPackage
-            #   run: |
-            #       echo "https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html"
-            #       rm -fr install
-            #       mkdir install
-            #       cp build/libs/tcpping-all.jar install/tcpping.jar
-            #       jpackage --version
+            - name: JPackage
+              run: |
+                  echo "https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html"
+                  rm -fr install
+                  mkdir install
+                  cp build/libs/tcpping-all.jar install/tcpping.jar
+                  jpackage --version
 
-            # - name: Make Native Image
-            #   run: |
-            #       cd install
-            #       native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
-            #       ./tcpping-linux
+            - name: Make Native Image
+              run: |
+                  cd install
+                  native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
+                  ./tcpping-linux
             
-            # - name: Upload Native Image to S3
-            #   uses: shallwefootball/s3-upload-action@master
-            #   with:
-            #     aws_key_id: ${{ secrets.AWS_KEY_ID }}
-            #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            #     aws_bucket: ${{ secrets.AWS_BUCKET }}
-            #     source_dir: 'install'
-            #     destination_dir: /tcpping/${{ github.sha }}
-            #   env:
-            #     AWS_REGION: 'eu-central-1'
+            - name: Upload Native Image to S3
+              uses: shallwefootball/s3-upload-action@master
+              with:
+                aws_key_id: ${{ secrets.AWS_KEY_ID }}
+                aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws_bucket: ${{ secrets.AWS_BUCKET }}
+                source_dir: 'install'
+                destination_dir: /tcpping/${{ github.sha }}
+              env:
+                AWS_REGION: 'eu-central-1'
 
-            - name: Check AWS CLI1
+            - name: Check AWS CLI
               run: |
                   which aws
                   aws --version
@@ -61,21 +63,11 @@ jobs:
                 aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                 aws-region: 'eu-central-1'
 
-            # - name: Install AWS CLI
-            #   run: |
-            #     sudo apt-get install -y unzip
-            #     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            #     unzip awscliv2.zip
-            #     sudo ./aws/install
-
-
-            - name: Check AWS CLI
-              run: |
-                  which aws
-                  aws --version
-
             - name: Upload to S3
-              run: aws s3 sync install s3://ngm-dev-s3/tcpping/
+              run: aws s3 sync install s3://ngm-dev-s3/tcpping/linux
+
+            - name: Upload macos version to S3
+              run: aws s3 sync install-macos s3://ngm-dev-s3/tcpping/macos
             
             - name: Create Snap Package
               run: |
