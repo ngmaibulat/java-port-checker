@@ -24,21 +24,21 @@ jobs:
             - name: Build via Gradle
               run: ./gradlew build
 
-            - name: JPackage
-              run: |
-                  echo "https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html"
-                  rm -fr install
-                  mkdir install
-                  cp build/libs/tcpping-all.jar install/tcpping.jar
-                  jpackage --version
+            # - name: JPackage
+            #   run: |
+            #       echo "https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html"
+            #       rm -fr install
+            #       mkdir install
+            #       cp build/libs/tcpping-all.jar install/tcpping.jar
+            #       jpackage --version
 
-            - name: Make Native Image
-              run: |
-                  cd install
-                  native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
-                  ./tcpping-linux
-                  echo ${{ secrets.AWS_KEY_ID }}
-                  echo ${{ secrets.AWS_BUCKET }}
+            # - name: Make Native Image
+            #   run: |
+            #       cd install
+            #       native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
+            #       ./tcpping-linux
+            #       echo ${{ secrets.AWS_KEY_ID }}
+            #       echo ${{ secrets.AWS_BUCKET }}
             
             - name: Upload Native Image to S3
               uses: shallwefootball/s3-upload-action@master
