@@ -1,5 +1,6 @@
-FROM gcr.io/distroless/base
+# FROM gcr.io/distroless/base
 # FROM ubuntu:latest
+FROM alpine:latest
 
 WORKDIR /app
 
