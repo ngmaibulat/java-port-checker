@@ -8,6 +8,10 @@ name: GraalVM Native Image
 # native-image -jar tcpping.jar --no-fallback --static --gc=G1 -march=native -H:+BuildReport -H:Name=tcpping-linux
 # native-image -jar tcpping.jar --no-fallback --static --gc=G1 -H:+BuildReport -H:Name=tcpping-linux
 
+# native-image -jar tcpping.jar --no-fallback --static --gc=G1 -H:+BuildReport -H:Name=tcpping-linux
+
+# https://www.graalvm.org/latest/reference-manual/native-image/guides/build-static-executables/
+
 on:
     workflow_dispatch:
     push:
@@ -53,7 +57,7 @@ jobs:
             - name: Make Native Image
               run: |
                   cd install
-                  native-image -jar tcpping.jar --no-fallback --static --gc=G1 -H:+BuildReport -H:Name=tcpping-linux
+                  native-image -jar tcpping.jar --no-fallback --static -H:+BuildReport -H:Name=tcpping-linux
                   ./tcpping-linux
 
             - name: Set up AWS credentials
