@@ -52,7 +52,6 @@ jobs:
               run: |
                   cd install
                   native-image -jar tcpping.jar --no-fallback --static --gc=G1 -march=native -H:+BuildReport -H:Name=tcpping-linux
-                  ldd ./tcpping-linux
                   ./tcpping-linux
 
             - name: Set up AWS credentials
