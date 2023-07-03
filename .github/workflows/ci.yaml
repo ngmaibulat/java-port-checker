@@ -69,7 +69,7 @@ jobs:
                   ls -la
             
             - name: Create Docker Image
-              uses: docker/build-push-action@v2
+              uses: docker/build-push-action@v4
               with:
                 context: .
                 # dockerfile: Dockerfile.native # Specify custom Dockerfile
