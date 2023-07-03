@@ -10,6 +10,11 @@ on:
         tags:
             - "*"
 
+env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ngmaibulat/tcping
+    IMAGE_TAG: 0.0.${{ github.run_number }}
+
 jobs:
     Run:
         runs-on: ubuntu-latest
@@ -55,10 +60,10 @@ jobs:
                 aws-region: 'eu-central-1'
 
             - name: Upload to S3
-              run: aws s3 sync install s3://ngm-dev-s3/tcpping/linux
-
-            - name: Upload macos version to S3
-              run: aws s3 sync install-macos s3://ngm-dev-s3/tcpping/macos
+              run: |
+                  dt=$(date +%Y-%m-%d)
+                  aws s3 sync install s3://ngm-dev-s3/tcpping-$dt/linux
+                  aws s3 sync install-macos s3://ngm-dev-s3/tcpping-$dt/macos
             
             - name: Create Snap Package
               run: |
@@ -67,6 +72,7 @@ jobs:
             - name: Upload Snap Package
               run: |
                   ls -la
+
             
             - name: Create Docker Image
               uses: docker/build-push-action@v4
@@ -74,7 +80,18 @@ jobs:
                 context: .
                 # dockerfile: Dockerfile.native # Specify custom Dockerfile
                 push: false
-                tags: ngmaibulat/tcping:latest
+                tags: ${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}:${{ ENV.IMAGE_TAG }}
+
+
+            - name: Log in to registry
+              # This is where you will update the personal access token to GITHUB_TOKEN
+              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+
+
+            - name: Push image
+              run: |
+                IMAGE_ID=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}:${{ ENV.IMAGE_TAG }}
+                docker push $IMAGE_ID:$VERSION
             
             - name: Upload Docker Image
               run: |
