@@ -6,8 +6,8 @@ WORKDIR /app
 
 COPY install/tcpping-linux /app/tcpping
 
-COPY install/libz.so.1 /lib
-COPY install/libc.so.6 /lib/x86_64-linux-gnu/libc.so.6
+# COPY install/libz.so.1 /lib
+# COPY install/libc.so.6 /lib/x86_64-linux-gnu/libc.so.6
 
 # RUN chmod +x /app/tcpping
 
