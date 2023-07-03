@@ -4,7 +4,7 @@ FROM gcr.io/distroless/base
 WORKDIR /app
 
 COPY install/tcpping-linux /app/tcpping
-COPY /usr/lib/x86_64-linux-gnu/libz.so.1 /lib
+COPY install/libz.so.1 /lib
 
 
 ENV LANG="en_US.UTF-8"
