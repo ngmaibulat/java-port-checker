@@ -14,6 +14,11 @@ jobs:
     Run:
         runs-on: ubuntu-latest
         steps:
+            - name: Check AWS CLI
+              run: |
+                  which aws
+                  aws --version
+
             - uses: actions/checkout@v3
 
             - name: GitHub Action for GraalVM
@@ -41,11 +46,6 @@ jobs:
                   cd install
                   native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
                   ./tcpping-linux
-
-            - name: Check AWS CLI
-              run: |
-                  which aws
-                  aws --version
 
             - name: Set up AWS credentials
               uses: aws-actions/configure-aws-credentials@v2
