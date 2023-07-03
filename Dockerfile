@@ -2,7 +2,7 @@ FROM gcr.io/distroless/base
 
 WORKDIR /app
 
-COPY install/tcpping /app/tcpping
+COPY install/tcpping-linux /app/tcpping
 
 
 ENV LANG="en_US.UTF-8"
@@ -13,7 +13,6 @@ ENV PORTCHECKER_HOST="portquiz.net"
 ENV PORTCHECKER_PORT="443"
 ENV PORTCHECKER_TIMEOUT_MS="9000"
 
-ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
+ENTRYPOINT ["/app/tcpping"]
 
-# CMD ["java", "-jar", "/app/tcpping.jar"]
 CMD ["443"]
