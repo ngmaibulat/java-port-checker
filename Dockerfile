@@ -4,7 +4,9 @@ FROM gcr.io/distroless/base
 WORKDIR /app
 
 COPY install/tcpping-linux /app/tcpping
+
 COPY install/libz.so.1 /lib
+COPY install/libc.so.6 /lib/x86_64-linux-gnu/libc.so.6
 
 
 ENV LANG="en_US.UTF-8"
