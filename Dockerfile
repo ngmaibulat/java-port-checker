@@ -1,6 +1,7 @@
 # FROM gcr.io/distroless/base
 # FROM ubuntu:latest
-FROM alpine:latest
+# FROM alpine:latest
+FROM scratch
 
 WORKDIR /app
 
