@@ -72,10 +72,11 @@ jobs:
               uses: docker/build-push-action@v2
               with:
                 context: .
-                dockerfile: Dockerfile.native # Specify custom Dockerfile
+                # dockerfile: Dockerfile.native # Specify custom Dockerfile
                 push: false
-                tags: ngmaibulat/tcping-native:latest
+                tags: ngmaibulat/tcping:latest
             
             - name: Upload Docker Image
               run: |
-                  ls -la
+                  docker images
+                  which podman
