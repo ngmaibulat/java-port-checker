@@ -69,8 +69,12 @@ jobs:
                   ls -la
             
             - name: Create Docker Image
-              run: |
-                  ls -la
+              uses: docker/build-push-action@v2
+              with:
+                context: .
+                dockerfile: Dockerfile.native # Specify custom Dockerfile
+                push: false
+                tags: ngmaibulat/tcping-native:latest
             
             - name: Upload Docker Image
               run: |
