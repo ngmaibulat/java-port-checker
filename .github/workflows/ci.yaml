@@ -53,7 +53,7 @@ jobs:
             - name: Make Native Image
               run: |
                   cd install
-                  native-image -jar tcpping.jar --static --gc=G1 -H:+BuildReport -H:Name=tcpping-linux
+                  native-image -jar tcpping.jar --no-fallback --static --gc=G1 -H:+BuildReport -H:Name=tcpping-linux
                   ./tcpping-linux
 
             - name: Set up AWS credentials
