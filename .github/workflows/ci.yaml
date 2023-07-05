@@ -75,6 +75,9 @@ jobs:
 
             - name: Publish Snap
               uses: snapcore/action-publish@v1
+              with:
+                snap: ${{ steps.build.outputs.snap }}
+                release: edge
             
             # You can now run Snapcraft shell commands
             - name: Use Snapcraft
