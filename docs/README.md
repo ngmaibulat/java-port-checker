@@ -6,10 +6,15 @@ Check if outbound tcp connection is allowed via connection to portquiz.net
 
 ### Install
 
--   For Macos, use the \*.pkg file in `install` folder here
+-   For Macos, use the \*.pkg file in `install-macos` folder here
 -   Or, download executable directly from links below
 -   Or, use Docker image
 -   For Linux, you can use snap package: `sudo snap install tcping`
+
+### Executables
+
+-   https://ngm-dev-s3.s3.eu-central-1.amazonaws.com/tcpping-2023-07-05/linux/tcpping-linux
+-   https://ngm-dev-s3.s3.eu-central-1.amazonaws.com/tcpping-2023-07-05/macos/tcpping-macos
 
 ### Set Path, when using \*.pkg
 
@@ -25,11 +30,6 @@ export PORTCHECKER_PORT="443"
 export PORTCHECKER_TIMEOUT_MS="7000"
 env | grep PORTCHECKER
 ```
-
-### Executables
-
--   https://ngm-dev-s3.s3.eu-central-1.amazonaws.com/tcpping-2023-07-05/linux/tcpping-linux
--   https://ngm-dev-s3.s3.eu-central-1.amazonaws.com/tcpping-2023-07-05/macos/tcpping-macos
 
 ### Run via CLI
 
