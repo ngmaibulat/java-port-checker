@@ -22,6 +22,7 @@ env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ngmaibulat/tcping
     IMAGE_TAG: 0.0.${{ github.run_number }}
+    SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_TOKEN }}
 
 jobs:
     Run:
@@ -33,6 +34,13 @@ jobs:
                   aws --version
 
             - uses: actions/checkout@v3
+
+            - name: Install Snapcraft
+              uses: samuelmeuli/action-snapcraft@v2
+
+            # You can now run Snapcraft shell commands
+            - name: Use Snapcraft
+              run: snapcraft whoami
 
             - name: GitHub Action for GraalVM
               uses: graalvm/setup-graalvm@v1 # https://github.com/marketplace/actions/github-action-for-graalvm
