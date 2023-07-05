@@ -12,6 +12,10 @@ name: GraalVM Native Image
 
 # https://www.graalvm.org/latest/reference-manual/native-image/guides/build-static-executables/
 
+# Get Snapcraft credentials
+# snapcraft export-login cred.json
+# put the contents of cred.json into the secret SNAPCRAFT_TOKEN
+
 on:
     workflow_dispatch:
     push:
@@ -37,10 +41,6 @@ jobs:
 
             - name: Install Snapcraft
               uses: samuelmeuli/action-snapcraft@v2
-
-            # You can now run Snapcraft shell commands
-            - name: Use Snapcraft
-              run: snapcraft whoami
 
             - name: GitHub Action for GraalVM
               uses: graalvm/setup-graalvm@v1 # https://github.com/marketplace/actions/github-action-for-graalvm
@@ -72,6 +72,14 @@ jobs:
                   native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
                   chmod +x tcpping-linux
                   ./tcpping-linux
+            
+            
+            # You can now run Snapcraft shell commands
+            - name: Use Snapcraft
+              run: |
+                  snapcraft whoami
+                  snapcraft
+                  snapcraft upload --release=edge tcpping.snap
 
             - name: Set up AWS credentials
               uses: aws-actions/configure-aws-credentials@v2
