@@ -78,11 +78,11 @@ jobs:
               run: |
                   ls -la *.snap
 
-            - name: Publish Snap
-              uses: snapcore/action-publish@v1
-              with:
-                snap: ${{ ENV.SNAP }}
-                release: edge
+            # - name: Publish Snap
+            #   uses: snapcore/action-publish@v1
+            #   with:
+            #     snap: ${{ ENV.SNAP }}
+            #     release: edge
             
             # You can now run Snapcraft shell commands
             - name: Use Snapcraft
