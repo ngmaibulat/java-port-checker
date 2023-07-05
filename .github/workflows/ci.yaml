@@ -76,12 +76,12 @@ jobs:
 
             - name: Check Snapcraft
               run: |
-                  ls -la
+                  ls -la *.snap
 
             - name: Publish Snap
               uses: snapcore/action-publish@v1
               with:
-                snap: $SNAP
+                snap: ${{ ENV.SNAP }}
                 release: edge
             
             # You can now run Snapcraft shell commands
@@ -89,7 +89,7 @@ jobs:
               run: |
                   snapcraft whoami
                   # snapcraft
-                  snapcraft upload --release=edge $SNAP
+                  snapcraft upload --release=edge ${{ ENV.SNAP }}
 
             - name: Set up AWS credentials
               uses: aws-actions/configure-aws-credentials@v2
