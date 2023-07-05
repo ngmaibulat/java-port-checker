@@ -41,6 +41,8 @@ jobs:
 
             - name: Install Snapcraft
               uses: samuelmeuli/action-snapcraft@v2
+              with:
+                use_lxd: true
 
             - name: GitHub Action for GraalVM
               uses: graalvm/setup-graalvm@v1 # https://github.com/marketplace/actions/github-action-for-graalvm
