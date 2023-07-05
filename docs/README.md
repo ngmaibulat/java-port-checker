@@ -7,8 +7,11 @@ Check if outbound tcp connection is allowed via connection to portquiz.net
 ### Install
 
 -   For Macos, use the \*.pkg file in `install` folder here
+-   Or, download executable directly from links below
+-   Or, use Docker image
+-   For Linux, you can use snap package: `sudo snap install tcping`
 
-### Set Path
+### Set Path, when using \*.pkg
 
 ```bash
 export PATH="/Applications/tcpping.app/Contents/MacOS:$PATH"
@@ -31,8 +34,8 @@ env | grep PORTCHECKER
 ### Run via CLI
 
 ```bash
-tcpping
-tcpping 443
+tcping
+tcping 443
 ```
 
 ### Run via Docker
