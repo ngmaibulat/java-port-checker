@@ -1,5 +1,5 @@
 name: tcping   # you can replace with your application's name
-version: '0.0.3'      # replace with your application's version
+version: '0.0.BUILD'      # replace with your application's version
 summary: TCP Ping
 description: |
   Test connectivity to a given TCP port

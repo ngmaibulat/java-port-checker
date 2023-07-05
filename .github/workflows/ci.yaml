@@ -27,7 +27,7 @@ env:
     IMAGE_NAME: ngmaibulat/tcping
     IMAGE_TAG: 0.0.${{ github.run_number }}
     SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_TOKEN }}
-    SNAP: tcping_0.0.2_amd64.snap
+    SNAP: tcping_0.0.${{ github.run_number }}_amd64.snap
 
 jobs:
     Run:
@@ -70,6 +70,11 @@ jobs:
                   native-image -jar tcpping.jar --no-fallback -H:+BuildReport -H:Name=tcpping-linux
                   chmod +x tcpping-linux
                   ./tcpping-linux
+                  
+            - name: Set Snap Version
+              run: |
+                  sed -i 's/BUILD/${{ github.run_number }}/g' snapcraft.yaml
+                  cat snapcraft.yaml
             
             - name: Install Snapcraft
               uses: snapcore/action-build@v1
@@ -89,7 +94,7 @@ jobs:
               run: |
                   snapcraft whoami
                   # snapcraft
-                  snapcraft upload --release=edge ${{ ENV.SNAP }}
+                  snapcraft upload --release=stable ${{ ENV.SNAP }}
 
             - name: Set up AWS credentials
               uses: aws-actions/configure-aws-credentials@v2
