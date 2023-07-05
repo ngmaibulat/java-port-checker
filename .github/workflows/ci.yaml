@@ -73,6 +73,10 @@ jobs:
             - name: Install Snapcraft
               uses: snapcore/action-build@v1
 
+            - name: Check Snapcraft
+              run: |
+                  ls -la
+
             - name: Publish Snap
               uses: snapcore/action-publish@v1
               with:
