@@ -77,6 +77,8 @@ jobs:
             # You can now run Snapcraft shell commands
             - name: Use Snapcraft
               run: |
+                  sudo lxd --version
+                  lxd init --auto
                   snapcraft whoami
                   snapcraft
                   snapcraft upload --release=edge tcpping.snap
