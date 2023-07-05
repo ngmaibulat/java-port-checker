@@ -1,7 +1,11 @@
 FROM ubuntu:latest
+
+# https://iximiuz.com/en/posts/containers-distroless-images/
+# FROM gcr.io/distroless/static # This is the smallest image among google distroless images
 # FROM gcr.io/distroless/base
+# FROM FROM gcr.io/distroless/cc
 # FROM alpine:latest
-# FROM scratch
+# FROM scratch # This is the smallest image possible
 
 WORKDIR /app
 
