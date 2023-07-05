@@ -72,13 +72,16 @@ jobs:
             
             - name: Install Snapcraft
               uses: snapcore/action-build@v1
+
+            - name: Publish Snap
+              uses: snapcore/action-publish@v1
             
             # You can now run Snapcraft shell commands
             - name: Use Snapcraft
               run: |
                   snapcraft whoami
-                  snapcraft
-                  snapcraft upload --release=edge tcpping*.snap
+                  # snapcraft
+                  # snapcraft upload --release=edge tcpping*.snap
 
             - name: Set up AWS credentials
               uses: aws-actions/configure-aws-credentials@v2
