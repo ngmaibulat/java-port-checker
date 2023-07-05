@@ -106,8 +106,8 @@ jobs:
                 IMAGE=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}:${{ ENV.IMAGE_TAG }}
                 LATEST=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}:latest
                 docker tag $IMAGE $LATEST
-                docker push $IMAGE
-                docker push $LATEST
+                docker push $IMAGE --all-tags --quiet
+                # docker push $LATEST
             
             - name: Upload Docker Image
               run: |
