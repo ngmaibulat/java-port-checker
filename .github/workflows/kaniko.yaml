@@ -27,6 +27,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: ${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}
+          tags: latest
           containerfiles: |
             ./Dockerfile
           build-args: |
@@ -36,4 +37,4 @@ jobs:
       - name: Push image
         run: |
           IMG=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}:latest
-          docker push $IMG --all-tags --quiet
+          docker push $IMG
