@@ -27,14 +27,14 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: ${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}
-          tags: latest
+          tags: ""
           containerfiles: |
             ./Dockerfile
-          build-args: |
-            some_arg=some_value
+          # build-args: |
+          #   some_arg=some_value
 
 
       - name: Push image
         run: |
-          IMG=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}:latest
+          IMG=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}
           docker push $IMG
