@@ -3,6 +3,11 @@ name: Build Docker image via Kaniko
 on: 
   workflow_dispatch:
 
+env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ngmaibulat/tcping
+    IMAGE_TAG: 0.0.${{ github.run_number }}
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -21,9 +26,15 @@ jobs:
       - name: Buildah Action
         uses: redhat-actions/buildah-build@v2
         with:
-          image: my-new-image
-          tags: v1 ${{ github.sha }}
+          image: ngmaibulat/tcping-buiuldah
+          tags: latest 0.0.${{ github.run_number }}
           containerfiles: |
             ./Dockerfile
           build-args: |
             some_arg=some_value
+
+
+      - name: Push image
+        run: |
+          IMG=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}
+          docker push $IMG --all-tags --quiet
