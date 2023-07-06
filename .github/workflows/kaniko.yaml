@@ -18,10 +18,12 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Kaniko build
-        uses: aevea/action-kaniko@master
-        with:
-          image: ghcr.io/ngmaibulat/tcping-kaniko:latest
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          tag: ghcr.io/ngmaibulat/tcping:latest
+    - name: Buildah Action
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: my-new-image
+        tags: v1 ${{ github.sha }}
+        containerfiles: |
+          ./Dockerfile
+        # build-args: |
+        #   some_arg=some_value
