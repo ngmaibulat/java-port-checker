@@ -36,5 +36,5 @@ jobs:
 
       - name: Push image
         run: |
-          IMG=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}
+          IMG=${{ ENV.IMAGE_NAME }}
           docker push $IMG --all-tags --quiet
