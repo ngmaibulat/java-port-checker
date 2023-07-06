@@ -24,4 +24,5 @@ jobs:
         run: |
           IMG=${{ ENV.REGISTRY }}/${{ ENV.IMAGE_NAME }}
           buildah bud -t $IMG:latest .
+          podman tag $IMG:latest $IMG:${{ ENV.IMAGE_TAG }}
           podman push $IMG
