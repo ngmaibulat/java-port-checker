@@ -1,4 +1,4 @@
-name: Build Docker image via Kaniko
+name: Build Docker image via Buildah
 
 on: 
   workflow_dispatch:
