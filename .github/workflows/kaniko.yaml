@@ -1,0 +1,26 @@
+name: Build Docker image via Kaniko
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build and push Docker image
+        uses: GoogleContainerTools/kaniko-action@v1.0.0
+        with:
+          context: "."
+          dockerfile: "./Dockerfile"
+          destination: "ghcr.io/ngmaibulat/tcping-kaniko:latest"
