@@ -25,5 +25,5 @@ jobs:
         tags: v1 ${{ github.sha }}
         containerfiles: |
           ./Dockerfile
-        # build-args: |
-        #   some_arg=some_value
+        build-args: |
+          some_arg=some_value
