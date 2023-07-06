@@ -18,9 +18,10 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Build and push Docker image
-        uses: GoogleContainerTools/kaniko-action@v1.0.0
+      - uses: int128/kaniko-action@v1
         with:
-          context: "."
-          dockerfile: "./Dockerfile"
-          destination: "ghcr.io/ngmaibulat/tcping-kaniko:latest"
+          push: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+          cache: true
+          cache-repository: ghcr.io/${{ github.repository }}/cache
